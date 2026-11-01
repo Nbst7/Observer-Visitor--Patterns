@@ -1,6 +1,7 @@
 package libraryhub.visitor;
 
 import libraryhub.catalog.AudioBook;
+import libraryhub.catalog.DvdDisc;
 import libraryhub.catalog.EBook;
 import libraryhub.catalog.Journal;
 import libraryhub.catalog.Library;
@@ -28,4 +29,6 @@ public interface Visitor<R> {
     R visitEBook(EBook eBook);
 
     R visitAudioBook(AudioBook audioBook);
+
+    R visitDvdDisc(DvdDisc dvdDisc);
 }

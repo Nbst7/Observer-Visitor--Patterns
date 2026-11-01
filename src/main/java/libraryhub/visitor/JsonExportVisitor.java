@@ -3,6 +3,7 @@ package libraryhub.visitor;
 import java.util.List;
 import java.util.stream.Collectors;
 import libraryhub.catalog.AudioBook;
+import libraryhub.catalog.DvdDisc;
 import libraryhub.catalog.EBook;
 import libraryhub.catalog.Journal;
 import libraryhub.catalog.Library;
@@ -70,6 +71,14 @@ public final class JsonExportVisitor implements Visitor<String> {
                 text("id", audioBook.id()), text("title", audioBook.title()), text("author", audioBook.author()),
                 number("durationMinutes", audioBook.durationMinutes()), number("copies", audioBook.copies()),
                 number("unitPrice", audioBook.unitPrice()));
+    }
+
+    @Override
+    public String visitDvdDisc(DvdDisc dvdDisc) {
+        return object("dvdDisc",
+                text("id", dvdDisc.id()), text("title", dvdDisc.title()), text("director", dvdDisc.director()),
+                number("runtimeMinutes", dvdDisc.runtimeMinutes()), number("copies", dvdDisc.copies()),
+                number("unitPrice", dvdDisc.unitPrice()));
     }
 
     private static String object(String type, String... members) {

@@ -3,6 +3,7 @@ package libraryhub.visitor;
 import java.util.EnumMap;
 import java.util.Map;
 import libraryhub.catalog.AudioBook;
+import libraryhub.catalog.DvdDisc;
 import libraryhub.catalog.EBook;
 import libraryhub.catalog.Item;
 import libraryhub.catalog.Journal;
@@ -64,6 +65,11 @@ public final class InventorySummaryVisitor implements Visitor<InventorySummary> 
     @Override
     public InventorySummary visitAudioBook(AudioBook audioBook) {
         return count(ItemKind.AUDIO_BOOK, audioBook);
+    }
+
+    @Override
+    public InventorySummary visitDvdDisc(DvdDisc dvdDisc) {
+        return count(ItemKind.DVD, dvdDisc);
     }
 
     private InventorySummary count(ItemKind kind, Item item) {

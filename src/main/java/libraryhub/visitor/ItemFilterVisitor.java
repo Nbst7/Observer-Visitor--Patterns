@@ -3,6 +3,7 @@ package libraryhub.visitor;
 import java.util.List;
 import java.util.function.Predicate;
 import libraryhub.catalog.AudioBook;
+import libraryhub.catalog.DvdDisc;
 import libraryhub.catalog.EBook;
 import libraryhub.catalog.Item;
 import libraryhub.catalog.Journal;
@@ -53,6 +54,11 @@ public final class ItemFilterVisitor implements Visitor<List<Item>> {
     @Override
     public List<Item> visitAudioBook(AudioBook audioBook) {
         return matching(audioBook);
+    }
+
+    @Override
+    public List<Item> visitDvdDisc(DvdDisc dvdDisc) {
+        return matching(dvdDisc);
     }
 
     private List<Item> matching(Item item) {

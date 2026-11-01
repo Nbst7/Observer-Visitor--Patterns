@@ -1,6 +1,7 @@
 package libraryhub.visitor;
 
 import libraryhub.catalog.AudioBook;
+import libraryhub.catalog.DvdDisc;
 import libraryhub.catalog.EBook;
 import libraryhub.catalog.Item;
 import libraryhub.catalog.Journal;
@@ -54,6 +55,11 @@ public final class ReplacementCostVisitor implements Visitor<Double> {
     @Override
     public Double visitAudioBook(AudioBook audioBook) {
         return physicalCost(audioBook);
+    }
+
+    @Override
+    public Double visitDvdDisc(DvdDisc dvdDisc) {
+        return physicalCost(dvdDisc);
     }
 
     private double physicalCost(Item item) {

@@ -1,6 +1,7 @@
 package libraryhub.visitor;
 
 import libraryhub.catalog.AudioBook;
+import libraryhub.catalog.DvdDisc;
 import libraryhub.catalog.EBook;
 import libraryhub.catalog.Journal;
 import libraryhub.catalog.Library;
@@ -56,5 +57,10 @@ public final class ConsumptionTimeVisitor implements Visitor<Double> {
     @Override
     public Double visitAudioBook(AudioBook audioBook) {
         return audioBook.durationMinutes() / 60.0;
+    }
+
+    @Override
+    public Double visitDvdDisc(DvdDisc dvdDisc) {
+        return dvdDisc.runtimeMinutes() / 60.0;
     }
 }
