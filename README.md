@@ -6,7 +6,7 @@ and new operations are added to a stable catalog tree (**Visitor**). Only JUnit 
 ## Build, test, run
 
 ```bash
-mvn test                                   # 42 JUnit 5 tests
+mvn test                                   # 50 JUnit 5 tests
 mvn -q compile
 java -cp target/classes libraryhub.Main --threads=4 --pairs=500
 ```
@@ -182,13 +182,64 @@ runs three visitors **on that one `Shelf` subtree only** (not the whole library)
 * No duplication: leaf visit methods delegate to one private helper; element validation is in `Checks`.
 * Every interface has a reason: `Event`/`Observer`/`Subject` (generic observer), `Element`/`Item`/`Visitor` (tree).
 
-<!--TRADEOFF-->
+## Trade-off proof (Visitor)
+
+Two separate commits show the price of the pattern. Both keep all tests green (45 and 50 tests).
+
+**Commit `032f4eb` - new visitor `ConsumptionTimeVisitor` (touches no element class).**
+
+| Files | Change |
+| --- | --- |
+| `visitor/ConsumptionTimeVisitor.java` | new (60 lines) |
+| `visitor/ConsumptionTimeVisitorTest.java` | new (34 lines) |
+
+Cost: one new class and its test. 0 existing files changed, 0 element classes changed. This is what Visitor buys:
+a new operation over the whole tree without editing the tree.
+
+**Commit `a3ba159` - new element type `DvdDisc`.**
+
+| Files | Change |
+| --- | --- |
+| `catalog/DvdDisc.java` | new element record |
+| `visitor/Visitor.java` | +1 method `visitDvdDisc` |
+| `visitor/ItemKind.java` | +1 constant `DVD` |
+| `visitor/ReplacementCostVisitor.java` | +1 method |
+| `visitor/InventorySummaryVisitor.java` | +1 method |
+| `visitor/ItemFilterVisitor.java` | +1 method |
+| `visitor/JsonExportVisitor.java` | +1 method |
+| `visitor/ConsumptionTimeVisitor.java` | +1 method |
+| `visitor/DvdDiscTest.java` | new test |
+
+Cost: 9 files (1 element, 1 interface, 1 enum, 5 visitors, 1 test), 116 lines added. The compiler forces the change
+in every visitor, which is safe (nothing is forgotten) but the cost grows with the number of visitors: V visitors
+means V + 2 existing files to edit for every new element type.
+
+**When I would reject Visitor:** if new element types appeared often (e.g. a new media type every month) while the
+number of operations stayed small, the cost of "touch every visitor" would be paid again and again; plain polymorphism
+(a method on each element) would be cheaper. Here the catalog types are stable and reports keep being added
+(cost, summary, filter, JSON, consumption time), so Visitor is the right choice.
+
+## Commit history
+
+1. chore: project skeleton
+2. feat(observer): generic Subject/Observer, event records, ListenerRegistry
+3. feat(visitor): composite catalog tree and `Visitor<R>`
+4. feat(visitor): four visitors (cost, summary, filter, JSON)
+5. feat(observer): circulation desk and overdue scanner, inventory, ledger
+6. feat(observer): listeners (reservations, statistics, aggregator chain, panel)
+7. feat(integration): overdue alert -> shelf inspection -> ticket
+8. feat(concurrency): `ProducerPool` and producers
+9. feat: composition root, `Main`, integration and stress tests
+10. docs: README and UML
+11. trade-off proof 1: new visitor
+12. trade-off proof 2: new element
+
 
 ## Tests
 
-42 tests: registry behaviour (typed delivery, duplicate subscription, unsubscribe inside the handler,
+50 tests: registry behaviour (typed delivery, duplicate subscription, unsubscribe inside the handler,
 subscribe during publish, failing listener), catalog index and validation, all four visitors against
 hand-calculated values (documented in `TestCatalogs`), exact JSON nesting and escaping, circulation and overdue scan,
 the observer chain, runtime reservations, the integration flow (subtree only, ticket), a **stress test with 4 threads x 1,000 events
 and exact expected counts**, subscribe/unsubscribe churn during publishing, atomic inventory, graceful shutdown,
-hanging and failing producers.
+hanging and failing producers, and the two trade-off commits (new visitor, new element).
