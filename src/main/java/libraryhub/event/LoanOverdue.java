@@ -20,7 +20,6 @@ public record LoanOverdue(
             throw new IllegalArgumentException("daysOverdue must be at least 1");
         }
     }
-
     @Override
     public EventType type() {
         return EventType.LOAN_OVERDUE;

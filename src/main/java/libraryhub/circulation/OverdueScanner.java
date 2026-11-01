@@ -11,7 +11,6 @@ import libraryhub.event.LoanOverdue;
 import libraryhub.event.Observer;
 import libraryhub.event.Subject;
 
-/** Subject #2: looks at the open loans and publishes one event per overdue loan. */
 public final class OverdueScanner implements Subject<LoanOverdue> {
 
     private final LoanLedger ledger;
@@ -26,7 +25,6 @@ public final class OverdueScanner implements Subject<LoanOverdue> {
         this.clock = clock;
     }
 
-    /** Returns how many overdue loans were published. */
     public int scan() {
         LocalDate today = LocalDate.now(clock);
         int published = 0;

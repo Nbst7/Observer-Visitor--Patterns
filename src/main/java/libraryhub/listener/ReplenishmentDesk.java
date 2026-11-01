@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import libraryhub.event.InspectionCompleted;
 import libraryhub.event.Observer;
 
-/** Opens a ticket whenever an inspection found items that are almost out of stock. */
 public final class ReplenishmentDesk implements Observer<InspectionCompleted> {
 
     private final ConcurrentLinkedQueue<ReplenishmentTicket> tickets = new ConcurrentLinkedQueue<>();

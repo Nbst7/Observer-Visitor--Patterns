@@ -13,7 +13,6 @@ public record DvdDisc(String id, String title, String director, int runtimeMinut
         copies = Checks.nonNegative(copies, "copies");
         unitPrice = Checks.nonNegative(unitPrice, "unitPrice");
     }
-
     @Override
     public <R> R accept(Visitor<R> visitor) {
         return visitor.visitDvdDisc(this);

@@ -9,7 +9,6 @@ import libraryhub.catalog.PrintedBook;
 import libraryhub.catalog.Section;
 import libraryhub.catalog.Shelf;
 
-/** Sample data for the demo. Prices and page counts are illustrative. */
 public final class DemoCatalog {
 
     private DemoCatalog() {

@@ -10,7 +10,6 @@ public record Section(String id, String name, List<Shelf> shelves) implements El
         name = Checks.text(name, "name");
         shelves = List.copyOf(shelves);
     }
-
     @Override
     public <R> R accept(Visitor<R> visitor) {
         return visitor.visitSection(this);

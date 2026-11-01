@@ -2,7 +2,6 @@ package libraryhub.catalog;
 
 import java.util.Objects;
 
-/** Constructor validation shared by the element records. */
 final class Checks {
 
     private Checks() {

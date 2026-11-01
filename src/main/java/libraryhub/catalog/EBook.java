@@ -2,7 +2,6 @@ package libraryhub.catalog;
 
 import libraryhub.visitor.Visitor;
 
-/** {@code copies} is the number of simultaneous licenses. */
 public record EBook(String id, String title, String author, int pages, double fileSizeMb, int copies,
                     double unitPrice) implements Item {
 

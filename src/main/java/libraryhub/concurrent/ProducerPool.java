@@ -10,11 +10,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Runs producers on a fixed-size ExecutorService and shuts it down gracefully.
- * A pool is single-use: {@link #runToCompletion} submits, stops accepting work,
- * waits for every task and then rethrows the first producer failure.
- */
+
 public final class ProducerPool {
 
     private final ExecutorService executor;

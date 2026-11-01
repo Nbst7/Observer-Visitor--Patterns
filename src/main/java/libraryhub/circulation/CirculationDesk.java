@@ -13,7 +13,6 @@ import libraryhub.event.ListenerRegistry;
 import libraryhub.event.Observer;
 import libraryhub.event.Subject;
 
-/** Subject #1: check-outs and returns publish availability events (push model). */
 public final class CirculationDesk implements Subject<ItemAvailability> {
 
     private final Catalog catalog;
@@ -34,7 +33,6 @@ public final class CirculationDesk implements Subject<ItemAvailability> {
         this.loanDays = loanDays;
     }
 
-    /** Empty if no copy is on the shelf (nothing is published then). */
     public Optional<Loan> checkOut(String itemId, String memberId) {
         Location location = locate(itemId);
         OptionalInt left = inventory.tryCheckOut(itemId);
@@ -49,7 +47,6 @@ public final class CirculationDesk implements Subject<ItemAvailability> {
         return Optional.of(loan);
     }
 
-    /** False if the loan is unknown or already closed. */
     public boolean returnItem(String loanId) {
         Optional<Loan> closed = ledger.close(loanId);
         if (closed.isEmpty()) {

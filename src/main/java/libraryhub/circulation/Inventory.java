@@ -8,11 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import libraryhub.catalog.Catalog;
 import libraryhub.catalog.Item;
 
-/**
- * Number of copies currently on the shelf, per item. The catalog tree stays immutable;
- * this is the only mutable stock state. Counters are atomic and bounded by [0, total],
- * so concurrent producers can never oversell or over-return a title.
- */
+
 public final class Inventory {
 
     private final Map<String, AtomicInteger> available;
@@ -33,12 +29,10 @@ public final class Inventory {
         return counter(itemId).get();
     }
 
-    /** Takes one copy; returns the copies left, or empty if none was available. */
     public OptionalInt tryCheckOut(String itemId) {
         return adjust(itemId, -1);
     }
 
-    /** Puts one copy back; returns the copies now available, or empty if all copies were already home. */
     public OptionalInt tryReturn(String itemId) {
         return adjust(itemId, +1);
     }

@@ -14,10 +14,7 @@ import libraryhub.visitor.InventorySummaryVisitor;
 import libraryhub.visitor.ItemFilterVisitor;
 import libraryhub.visitor.ReplacementCostVisitor;
 
-/**
- * Integration point (Subject #3): runs visitors on ONE shelf (the subtree around an overdue
- * item, never the whole library) and publishes the result as a new event.
- */
+
 public final class ShelfInspector implements Subject<InspectionCompleted> {
 
     private final Catalog catalog;

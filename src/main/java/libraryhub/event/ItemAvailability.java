@@ -2,7 +2,6 @@ package libraryhub.event;
 
 import java.util.Objects;
 
-/** A copy of an item left or came back to the shelf. {@code type} is ITEM_CHECKED_OUT or ITEM_RETURNED. */
 public record ItemAvailability(
         EventType type,
         String itemId,

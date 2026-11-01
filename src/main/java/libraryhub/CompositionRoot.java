@@ -24,10 +24,7 @@ import libraryhub.listener.ReservationService;
 import libraryhub.listener.SectionAggregator;
 import libraryhub.listener.StatisticsCollector;
 
-/**
- * The only place that creates objects and connects them (constructor injection everywhere else).
- * Subscriptions are wired here too, so the classes themselves do not know who listens to them.
- */
+
 public final class CompositionRoot {
 
     private CompositionRoot() {
@@ -76,7 +73,6 @@ public final class CompositionRoot {
                 statistics, panel, overdueAlert, replenishment, reservations, notifications, listenerErrors);
     }
 
-    /** One producer per configured thread, all working on the same items to provoke contention. */
     public static List<Runnable> producers(LibrarySystem system, List<String> itemIds) {
         return java.util.stream.IntStream.range(0, system.config().producerThreads())
                 .<Runnable>mapToObj(n -> new CirculationProducer(system.desk(), itemIds,

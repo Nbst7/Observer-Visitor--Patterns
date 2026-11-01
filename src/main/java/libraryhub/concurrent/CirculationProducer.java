@@ -3,10 +3,6 @@ package libraryhub.concurrent;
 import java.util.List;
 import libraryhub.circulation.CirculationDesk;
 
-/**
- * One producer thread's workload: {@code pairs} times it borrows an item and brings it back,
- * which publishes exactly two events per pair when stock is available.
- */
 public final class CirculationProducer implements Runnable {
 
     private final CirculationDesk desk;

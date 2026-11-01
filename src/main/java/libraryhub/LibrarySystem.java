@@ -15,7 +15,6 @@ import libraryhub.listener.ReservationService;
 import libraryhub.listener.SectionAggregator;
 import libraryhub.listener.StatisticsCollector;
 
-/** The fully wired object graph produced by {@link CompositionRoot}. */
 public record LibrarySystem(
         AppConfig config,
         Catalog catalog,

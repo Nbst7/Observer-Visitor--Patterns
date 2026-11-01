@@ -1,6 +1,5 @@
 package libraryhub;
 
-/** Settings of the whole system. Parsed once in Main and passed to the composition root. */
 public record AppConfig(int producerThreads, int pairsPerProducer, int loanDays,
                         int lowStockThreshold, double shippingPerCopy) {
 
@@ -17,7 +16,6 @@ public record AppConfig(int producerThreads, int pairsPerProducer, int loanDays,
         return new AppConfig(3, 500, 14, 1, 2.0);
     }
 
-    /** Understands {@code --threads=N} and {@code --pairs=N}; everything else keeps its default. */
     public static AppConfig parse(String[] args) {
         AppConfig base = defaults();
         int threads = base.producerThreads();

@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.concurrent.atomic.AtomicReference;
 
-/** A clock the demo and the tests can move forward, e.g. to make loans overdue. */
 public final class AdjustableClock extends Clock {
 
     private final AtomicReference<Instant> now;

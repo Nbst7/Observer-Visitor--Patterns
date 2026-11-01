@@ -12,7 +12,6 @@ import libraryhub.event.LoanOverdue;
 import libraryhub.event.Observer;
 import libraryhub.event.SectionSummary;
 
-/** The librarian's screen: latest summary per section plus a log of alerts and inspections. */
 public final class LibrarianPanel implements Observer<Event> {
 
     private final Map<String, SectionSummary> latestSummaries = new ConcurrentHashMap<>();

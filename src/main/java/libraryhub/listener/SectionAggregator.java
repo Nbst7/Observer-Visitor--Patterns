@@ -12,11 +12,7 @@ import libraryhub.event.Observer;
 import libraryhub.event.SectionSummary;
 import libraryhub.event.Subject;
 
-/**
- * Observer and Subject at once (the observer chain): listens to availability events and
- * republishes per-section totals. Each update is one atomic map operation, so the
- * published numbers always match the event they were computed from.
- */
+
 public final class SectionAggregator implements Observer<ItemAvailability>, Subject<SectionSummary> {
 
     private record Totals(long checkouts, long returns) {

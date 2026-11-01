@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** Open loans. Backed by a concurrent map; reads are snapshots. */
 public final class LoanLedger {
 
     private final ConcurrentHashMap<String, Loan> openLoans = new ConcurrentHashMap<>();

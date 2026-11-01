@@ -13,7 +13,6 @@ public record AudioBook(String id, String title, String author, int durationMinu
         copies = Checks.nonNegative(copies, "copies");
         unitPrice = Checks.nonNegative(unitPrice, "unitPrice");
     }
-
     @Override
     public <R> R accept(Visitor<R> visitor) {
         return visitor.visitAudioBook(this);

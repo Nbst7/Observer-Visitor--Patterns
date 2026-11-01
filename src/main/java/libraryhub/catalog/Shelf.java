@@ -10,7 +10,6 @@ public record Shelf(String id, String label, List<Item> items) implements Elemen
         label = Checks.text(label, "label");
         items = List.copyOf(items);
     }
-
     @Override
     public <R> R accept(Visitor<R> visitor) {
         return visitor.visitShelf(this);

@@ -7,15 +7,6 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
-/**
- * Thread-safe listener registry shared by every subject.
- *
- * <p>One copy-on-write list per event type. Publishing iterates a snapshot, so a
- * listener may subscribe or unsubscribe (itself or others) from inside its handler,
- * and other threads may do the same while events are being published. There is no lock
- * around the subject: the map is built once in the constructor and never modified.
- * A subscription made during a publish takes effect from the next event.
- */
 public final class ListenerRegistry<E extends Event> implements Subject<E> {
 
     private final Map<EventType, CopyOnWriteArrayList<Observer<? super E>>> listeners;
@@ -41,7 +32,6 @@ public final class ListenerRegistry<E extends Event> implements Subject<E> {
         listeners.get(type).remove(observer);
     }
 
-    /** Delivers the event synchronously to every listener subscribed to its type. */
     public void publish(E event) {
         for (Observer<? super E> observer : listeners.get(event.type())) {
             try {

@@ -3,7 +3,6 @@ package libraryhub.event;
 import java.util.List;
 import java.util.Objects;
 
-/** Result of running the inspection visitors on one shelf. */
 public record InspectionCompleted(
         String shelfId,
         String triggerLoanId,

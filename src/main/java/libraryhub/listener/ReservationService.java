@@ -5,7 +5,6 @@ import libraryhub.event.EventType;
 import libraryhub.event.ItemAvailability;
 import libraryhub.event.Subject;
 
-/** Lets members join at runtime: every reservation becomes a new listener. */
 public final class ReservationService {
 
     private final Subject<ItemAvailability> source;

@@ -7,10 +7,6 @@ import libraryhub.event.ItemAvailability;
 import libraryhub.event.Observer;
 import libraryhub.event.Subject;
 
-/**
- * A member waits for one item. It notifies once and then unsubscribes itself from inside
- * its own handler, which the registry must tolerate.
- */
 public final class ReservationWatch implements Observer<ItemAvailability> {
 
     private final String itemId;

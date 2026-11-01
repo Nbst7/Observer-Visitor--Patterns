@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Read-only index over a {@link Library} tree. Built once, never modified afterwards,
- * so it can be read from any thread without synchronization.
- */
 public final class Catalog {
 
     private final Library library;

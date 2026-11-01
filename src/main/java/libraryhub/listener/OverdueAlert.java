@@ -5,7 +5,6 @@ import libraryhub.circulation.ShelfInspector;
 import libraryhub.event.LoanOverdue;
 import libraryhub.event.Observer;
 
-/** Reacts to an overdue loan by asking the inspector to check the shelf the item belongs to. */
 public final class OverdueAlert implements Observer<LoanOverdue> {
 
     private final ShelfInspector inspector;

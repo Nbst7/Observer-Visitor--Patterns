@@ -8,7 +8,6 @@ import libraryhub.event.Event;
 import libraryhub.event.EventType;
 import libraryhub.event.Observer;
 
-/** Counts every event it is subscribed to, per type. Lock-free counters. */
 public final class StatisticsCollector implements Observer<Event> {
 
     private final Map<EventType, LongAdder> counters;
